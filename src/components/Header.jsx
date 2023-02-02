@@ -12,15 +12,18 @@ const Header = ({ setListImages, setIsLoading }) => {
 
     try {
       setIsLoading(true);
-      const response = await fetch("http://localhost:5500/openai/images", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          prompt: inputValue,
-        }),
-      });
+      const response = await fetch(
+        "image-generator-backend-production.up.railway.app",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            prompt: inputValue,
+          }),
+        }
+      );
       const jsonData = await response.json();
       setListImages(jsonData.data);
     } catch (error) {
